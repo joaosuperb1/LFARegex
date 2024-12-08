@@ -11,40 +11,12 @@ import java.util.List;
 public class Aula {
 
     public static void main(String[] args) {
-        /*ExpressaoRegular ER = new ExpressaoRegular();
-
-        //Teste 1, expressão regular: DIGITOS
-        ER.confere(ER.DIGITOS, "000511200021");
-        
-        //Teste 2, expressão regular: DIGITOS
-        ER.confere(ER.DIGITOS, "000511200021ADAF");
-        
-        //Teste 3, expressão regular: LETRAS
-        ER.confere(ER.LETRAS, "ASDFEAFdafsafdsf");
-
-        //Teste 4, expressão regular: LETRAS
-        ER.confere(ER.LETRAS, "ASDFEAFdafsafdsf4565");
-                
-        //Teste 5, expressão regular: IDENT (nome de variável, função e classes)
-        ER.confere(ER.IDENT, "Altura1");
-
-        //Teste 6, expressão regular: IDENT (nome de variável, função e classes)
-        ER.confere(ER.IDENT, "1Altura");
-                
-        
-        //Teste 7, expressão regular: REAL
-        ER.confere(ER.REAL, "123.908777E+30");
-        
-        //Teste 8, expressão regular: REAL
-        ER.confere(ER.REAL, "0.17E-5");
-        
-        //Teste 9, expressão regular: ATRIBUICAO
-        ER.confere(ER.ATRIBUICAO, "media=-123.908777E+30");
-        
-        ER.confere(ER.INTEIRO, "10");*/      
-        
+              
         Aula aula1 = new Aula();
+        ExpressaoRegular ER = new ExpressaoRegular();
         
+        ER.confere(ER.DIGITOS, "1/0");
+                
         // Vetor com possiveis assinaturas de funções
         List<String> assinaturas = Arrays.asList(
             "void funcao1(int a, float b)",
@@ -86,6 +58,8 @@ public class Aula {
         String regexExpressaoMatematica = aula1.regexExpressaoMatematica();
         aula1.testarExpressao("Expressão Matemática", regexExpressaoMatematica, expressoesMatematicas);
     }
+    
+    
 
     //regex de assinatura de funções
     public String regexAssinaturaFuncao() {
@@ -112,7 +86,11 @@ public class Aula {
         System.out.println("Testando: " + descricao);
         for (String exemplo : exemplos) {
             if (exemplo.matches(regex)) {
-                System.out.println("ACEITA: " + exemplo);
+                if (exemplo.contains("/0")) { // Aqui eu corrijo o problema da divisão por 0
+                    System.err.println("ERRO MATEMÁTICO: " + exemplo + " (Divisão por zero)");
+                } else{
+                    System.out.println("ACEITA: " + exemplo);
+                }
             } else {
                 System.err.println("REJEITADA: " + exemplo);
             }
@@ -120,3 +98,35 @@ public class Aula {
         System.out.println();
     }
 }
+
+/*ExpressaoRegular ER = new ExpressaoRegular();
+
+        //Teste 1, expressão regular: DIGITOS
+        ER.confere(ER.DIGITOS, "000511200021");
+        
+        //Teste 2, expressão regular: DIGITOS
+        ER.confere(ER.DIGITOS, "000511200021ADAF");
+        
+        //Teste 3, expressão regular: LETRAS
+        ER.confere(ER.LETRAS, "ASDFEAFdafsafdsf");
+
+        //Teste 4, expressão regular: LETRAS
+        ER.confere(ER.LETRAS, "ASDFEAFdafsafdsf4565");
+                
+        //Teste 5, expressão regular: IDENT (nome de variável, função e classes)
+        ER.confere(ER.IDENT, "Altura1");
+
+        //Teste 6, expressão regular: IDENT (nome de variável, função e classes)
+        ER.confere(ER.IDENT, "1Altura");
+                
+        
+        //Teste 7, expressão regular: REAL
+        ER.confere(ER.REAL, "123.908777E+30");
+        
+        //Teste 8, expressão regular: REAL
+        ER.confere(ER.REAL, "0.17E-5");
+        
+        //Teste 9, expressão regular: ATRIBUICAO
+        ER.confere(ER.ATRIBUICAO, "media=-123.908777E+30");
+        
+        ER.confere(ER.INTEIRO, "10");*/

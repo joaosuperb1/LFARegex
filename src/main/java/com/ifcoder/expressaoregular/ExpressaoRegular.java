@@ -20,7 +20,11 @@ public class ExpressaoRegular {
     public String REAL;
     public String INTEIRO;
     public String NUMEROS;
-    public String ATRIBUICAO;    
+    public String ATRIBUICAO;
+    public String ASSINATURA_FUNCAO;
+    public String PARAMETROS_FUNCAO;
+    public String CONDICIONAL;
+    public String EXPRESSAO_MATEMATICA;
     
 
     /**
@@ -57,7 +61,15 @@ public class ExpressaoRegular {
         INTEIRO = "("+DIGITOS + EXPONENCIAL + "?)";
         NUMEROS = "(" + INTEIRO + "|" + REAL + ")";
 
-        ATRIBUICAO = IDENT + BRANCOS + "=" + BRANCOS + REAL;           
+        ATRIBUICAO = IDENT + BRANCOS + "=" + BRANCOS + REAL;
+        
+        // Expressão Regular com os macros
+        ASSINATURA_FUNCAO = IDENT + BRANCOS + "\\(" + BRANCOS + "(" + IDENT + BRANCOS + "," + BRANCOS + ")*" + IDENT + "?" + BRANCOS + "\\)";
+        PARAMETROS_FUNCAO = IDENT + BRANCOS + IDENT + "(" + BRANCOS + "," + BRANCOS + IDENT + BRANCOS + IDENT + ")*";
+        CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + BRANCOS + "[<>=!]+" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + BRANCOS + "\\)";
+        EXPRESSAO_MATEMATICA = "(" + IDENT + "|" + NUMEROS + ")" + "(" + BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|" + NUMEROS + "|\\[" + NUMEROS + "\\])" + ")*";
+        
+        
     }
 
     public void confere(String exp, String sentenca) {
