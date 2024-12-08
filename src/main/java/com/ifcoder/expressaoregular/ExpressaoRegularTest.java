@@ -6,8 +6,7 @@ package com.ifcoder.expressaoregular;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/*Classe criada para tratar exceções utilizando da api Junit, 
-é como usar try-catch porém o junit faz testes automatizados
+/*Classe criada para tratar exceções utilizando da api Junit, o junit faz testes automatizados
 para verificar se o código funciona conforme esperado em vários cenários diferentes */
 
 public class ExpressaoRegularTest {
@@ -55,4 +54,5 @@ public class ExpressaoRegularTest {
 
     assertEquals("ERRO MATEMATICO: Divisao por zero detectada.", exception.getMessage());
     }
+
 }
