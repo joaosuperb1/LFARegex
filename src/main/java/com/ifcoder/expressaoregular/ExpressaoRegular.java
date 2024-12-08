@@ -95,12 +95,12 @@ public class ExpressaoRegular {
         }
     }
     
-    public void confereTrecho(String exp, List<String> exemplos){
+    public void confereTrecho(String exp, List<String> exemplos){//Quero fazer com que essa função funcione sem eu mecionar qual regex devo usar.
     System.out.println("Testando expressões regulares...");
     for (String exemplo : exemplos){
-        confere(exp, exemplo);  // Chamando o método confere para cada exemplo
+        confere(exp, exemplo);
     }
     System.out.println();
 }
-
+   
 }
