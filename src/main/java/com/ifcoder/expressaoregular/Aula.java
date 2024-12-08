@@ -11,12 +11,12 @@ import java.util.List;
 public class Aula {
 
     public static void main(String[] args) {
-              
-        Aula aula1 = new Aula();
+        
         ExpressaoRegular ER = new ExpressaoRegular();
         
         ER.confere(ER.DIGITOS, "1/0");
-                
+        ER.confere(ER.DIGITOS, "1 soma int");
+        
         // Vetor com possiveis assinaturas de funções
         List<String> assinaturas = Arrays.asList(
             "void funcao1(int a, float b)",
@@ -24,9 +24,8 @@ public class Aula {
             "int soma(int x, int y)",
             "1 soma int"
         );
-        String regexAssinatura = aula1.regexAssinaturaFuncao();
-        aula1.testarExpressao("Assinatura de Funções", regexAssinatura, assinaturas);
-
+        ER.confereTrecho(ER.ASSINATURA_FUNCAO, assinaturas);
+        
         // Vetor com parametros de funções
         List<String> parametros = Arrays.asList(
             "int a, float b",
@@ -34,8 +33,7 @@ public class Aula {
             "double x, int y, char z",
             "float 1"
         );
-        String regexParametros = aula1.regexParametrosFuncao();
-        aula1.testarExpressao("Parâmetros de Funções", regexParametros, parametros);
+        ER.confereTrecho(ER.PARAMETROS_FUNCAO, parametros);
 
         // Vetor com Condicionais
         List<String> condicionais = Arrays.asList(
@@ -44,9 +42,8 @@ public class Aula {
             "if(a == b)",
             "(a : b)if"
         );
-        String regexCondicional = aula1.regexCondicional();
-        aula1.testarExpressao("Condicional", regexCondicional, condicionais);
-
+        ER.confereTrecho(ER.CONDICIONAL,condicionais);
+        
         // Vetor com possiveis expressões matemática
         List<String> expressoesMatematicas = Arrays.asList(
             "3+media/3",
@@ -55,48 +52,10 @@ public class Aula {
             "1/0" // Tratar erro /0
             // Faz sentido do ponto de vista linguistico porem do ponto de vista matemático não faz.
         );
-        String regexExpressaoMatematica = aula1.regexExpressaoMatematica();
-        aula1.testarExpressao("Expressão Matemática", regexExpressaoMatematica, expressoesMatematicas);
+        ER.confereTrecho(ER.EXPRESSAO_MATEMATICA, expressoesMatematicas);
     }
     
-    
 
-    //regex de assinatura de funções
-    public String regexAssinaturaFuncao() {
-        return "\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*)?\\s*\\)";
-    }
-
-    //regex de parâmetros de funções
-    public String regexParametrosFuncao() {
-        return "\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*";
-    }
-
-    //regez de condicionais
-    public String regexCondicional() {
-        return "if\\s*\\(.*\\)";
-    }
-
-    //regez de expressões matemáticas
-    public String regexExpressaoMatematica() {
-        return "[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?(\\s*[-+*/]\\s*[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?)*";
-    }
-
-    //testar regex
-    public void testarExpressao(String descricao, String regex, List<String> exemplos) {
-        System.out.println("Testando: " + descricao);
-        for (String exemplo : exemplos) {
-            if (exemplo.matches(regex)) {
-                if (exemplo.contains("/0")) { // Aqui eu corrijo o problema da divisão por 0
-                    System.err.println("ERRO MATEMÁTICO: " + exemplo + " (Divisão por zero)");
-                } else{
-                    System.out.println("ACEITA: " + exemplo);
-                }
-            } else {
-                System.err.println("REJEITADA: " + exemplo);
-            }
-        }
-        System.out.println();
-    }
 }
 
 /*ExpressaoRegular ER = new ExpressaoRegular();
@@ -130,3 +89,45 @@ public class Aula {
         ER.confere(ER.ATRIBUICAO, "media=-123.908777E+30");
         
         ER.confere(ER.INTEIRO, "10");*/
+
+        
+        /*
+        //regex de assinatura de funções
+    public String regexAssinaturaFuncao() {
+        return "\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*)?\\s*\\)";
+    }
+
+    //regex de parâmetros de funções
+    public String regexParametrosFuncao() {
+        return "\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*";
+    }
+
+    //regez de condicionais
+    public String regexCondicional() {
+        return "if\\s*\\(.*\\)";
+    }
+
+    //regez de expressões matemáticas
+    public String regexExpressaoMatematica() {
+        return "[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?(\\s*[-+*///]\\s*[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?)*";
+    //}
+        
+
+    /*
+    public void testarExpressao(String descricao, String regex, List<String> exemplos) {
+        System.out.println("Testando: " + descricao);
+        for (String exemplo : exemplos) {
+            if (exemplo.matches(regex)) {
+                if (exemplo.contains("/0")) { // Aqui eu corrijo o problema da divisão por 0
+                    System.err.println("ERRO MATEMÁTICO: " + exemplo + " (Divisão por zero)");
+                } else{
+                    System.out.println("ACEITA: " + exemplo);
+                }
+            } else {
+                System.err.println("REJEITADA: " + exemplo);
+            }
+        }
+        System.out.println();
+    }
+    
+    */

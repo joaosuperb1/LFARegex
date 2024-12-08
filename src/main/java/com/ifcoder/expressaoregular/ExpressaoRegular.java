@@ -5,6 +5,8 @@
  */
 package com.ifcoder.expressaoregular;
 
+import java.util.List;
+
 /**
  *
  * @author jose
@@ -56,6 +58,7 @@ public class ExpressaoRegular {
         LETRA = "([A-Za-z])";
         LETRAS = LETRA + "*";
         IDENT = "(" + LETRA + "(" + LETRA + "|" + DIGITO + ")*)";
+        //O Identificador acha nome de variavel, funções etc... Não aceita um numero ou caracter especial no inicio.
         EXPONENCIAL = "(E(\\+|-)" + DIGITOS + ")";
         REAL = "(\\-?" + DIGITOS + "\\.?" + DIGITOS + EXPONENCIAL+")";
         INTEIRO = "("+DIGITOS + EXPONENCIAL + "?)";
@@ -64,9 +67,17 @@ public class ExpressaoRegular {
         ATRIBUICAO = IDENT + BRANCOS + "=" + BRANCOS + REAL;
         
         // Expressão Regular com os macros
+        //"\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*)?\\s*\\)"
+        //\\w+(uma palavra) \\s+(espaço em branco)\\w+(mais uma palavra)...
         ASSINATURA_FUNCAO = IDENT + BRANCOS + "\\(" + BRANCOS + "(" + IDENT + BRANCOS + "," + BRANCOS + ")*" + IDENT + "?" + BRANCOS + "\\)";
+        
+        // regex para Parametro "\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*"
         PARAMETROS_FUNCAO = IDENT + BRANCOS + IDENT + "(" + BRANCOS + "," + BRANCOS + IDENT + BRANCOS + IDENT + ")*";
+        
+        // regex para condicional "if\\s*\\(.*\\)"
         CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + BRANCOS + "[<>=!]+" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + BRANCOS + "\\)";
+        
+        // regex para expressao matematica "[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?(\\s*[-+*/]\\s*[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?)*"
         EXPRESSAO_MATEMATICA = "(" + IDENT + "|" + NUMEROS + ")" + "(" + BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|" + NUMEROS + "|\\[" + NUMEROS + "\\])" + ")*";
         
         
@@ -83,5 +94,13 @@ public class ExpressaoRegular {
             System.err.println("Sentença vazia.");
         }
     }
+    
+    public void confereTrecho(String exp, List<String> exemplos){
+    System.out.println("Testando expressões regulares...");
+    for (String exemplo : exemplos){
+        confere(exp, exemplo);  // Chamando o método confere para cada exemplo
+    }
+    System.out.println();
+}
 
 }
