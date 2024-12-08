@@ -3,6 +3,8 @@ package com.ifcoder.expressaoregular;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -13,9 +15,52 @@ public class Aula {
     public static void main(String[] args) {
         
         ExpressaoRegular ER = new ExpressaoRegular();
+        Scanner scanner = new Scanner(System.in);
+        boolean continuar = true;
+
+        while (continuar) {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Testar Digitos");
+            System.out.println("2. Testar Identificadores");
+            System.out.println("3. Testar Assinatura de Funcao");
+            System.out.println("4. Testar Expressao Matematica");
+            System.out.println("5. Testar Condicional");
+            System.out.println("0. Sair");
+            System.out.print("Escolha uma opcao: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); // Limpar buffer
+
+            if (opcao == 0) {
+                continuar = false;
+                System.out.println("Saindo...");
+            } else {
+                switch (opcao) {
+                        case 1 -> System.out.println("Formato esperado: Digitos (somente numeros). Exemplo: '12345'");
+                        case 2 -> System.out.println("Formato esperado: Identificadores (letras seguidas de letras ou numeros). Exemplo: 'variavel1'");
+                        case 3 -> System.out.println("Formato esperado: Assinatura de funcao. Exemplo: 'int soma(int a, int b)'");
+                        case 4 -> System.out.println("Formato esperado: Expressoes matematicas com operadores como +, -, *, /");
+                        case 5 -> System.out.println("Formato esperado: Condicionais. Exemplo: 'if(a == b)'");
+                        default -> { System.err.println("Opcao invalida!");
+                        continue;
+                    }
+                    }
+                System.out.print("Digite a sentenca para testar: ");
+                String sentenca = scanner.nextLine();
+
+                switch (opcao) {
+                    case 1 -> ER.confere(ER.DIGITOS, sentenca);
+                    case 2 -> ER.confere(ER.IDENT, sentenca);
+                    case 3 -> ER.confere(ER.ASSINATURA_FUNCAO, sentenca);
+                    case 4 -> ER.confere(ER.EXPRESSAO_MATEMATICA, sentenca);
+                    case 5 -> ER.confere(ER.CONDICIONAL, sentenca);
+                    default -> System.err.println("Opcao invalida!");
+                }
+            }
+        }
+
+        scanner.close();
         
-        ER.confere(ER.DIGITOS, "1/0");
-        ER.confere(ER.DIGITOS, "1 soma int");
+        ER.confere(ER.ASSINATURA_FUNCAO, "void funcao1(int a, float b)");
         
         // Vetor com possiveis assinaturas de funções
         List<String> assinaturas = Arrays.asList(
