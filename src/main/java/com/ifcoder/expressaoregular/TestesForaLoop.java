@@ -1,106 +1,61 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.ifcoder.expressaoregular;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
-/**
- *
- * @author jose
- */
-public class Aula {
+public class TestesForaLoop {
+    private final ConferirER conferirER; //Acessar metodos confere
+    private final ExpressaoRegular ER; // Acessar os padrões
+    
+    /* Construtor instância de ConferirER */
+    public TestesForaLoop(ConferirER conferirER) {
+        this.conferirER = conferirER;
+        this.ER = new ExpressaoRegular();
+    }
 
-    public static void main(String[] args) {
-        
-        ExpressaoRegular ER = new ExpressaoRegular();
-        Scanner scanner = new Scanner(System.in);
-        boolean continuar = true;
+    public void executarTestes() {
+        System.out.println("Executando testes adicionais fora do loop...");
 
-        while (continuar) {
-            System.out.println("\n--- MENU ---");
-            System.out.println("1. Testar Digitos");
-            System.out.println("2. Testar Identificadores");
-            System.out.println("3. Testar Assinatura de Funcao");
-            System.out.println("4. Testar Expressao Matematica");
-            System.out.println("5. Testar Condicional");
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opcao: ");
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar buffer
-
-            if (opcao == 0) {
-                continuar = false;
-                System.out.println("Saindo...");
-            } else {
-                switch (opcao) {
-                        case 1 -> System.out.println("Formato esperado: Digitos (somente numeros). Exemplo: '12345'");
-                        case 2 -> System.out.println("Formato esperado: Identificadores (letras seguidas de letras ou numeros). Exemplo: 'variavel1'");
-                        case 3 -> System.out.println("Formato esperado: Assinatura de funcao. Exemplo: 'int soma(int a, int b)'");
-                        case 4 -> System.out.println("Formato esperado: Expressoes matematicas com operadores como +, -, *, /");
-                        case 5 -> System.out.println("Formato esperado: Condicionais. Exemplo: 'if(a == b)'");
-                        default -> { System.err.println("Opcao invalida!");
-                        continue;
-                    }
-                    }
-                System.out.print("Digite a sentenca para testar: ");
-                String sentenca = scanner.nextLine();
-
-                switch (opcao) {
-                    case 1 -> ER.confere(ER.DIGITOS, sentenca);
-                    case 2 -> ER.confere(ER.IDENT, sentenca);
-                    case 3 -> ER.confere(ER.ASSINATURA_FUNCAO, sentenca);
-                    case 4 -> ER.confere(ER.EXPRESSAO_MATEMATICA, sentenca);
-                    case 5 -> ER.confere(ER.CONDICIONAL, sentenca);
-                    default -> System.err.println("Opcao invalida!");
-                }
-            }
-        }
-
-        scanner.close();
-        
-        ER.confere(ER.ASSINATURA_FUNCAO, "void funcao1(int a, float b)");
-        
-        // Vetor com possiveis assinaturas de funções
+        // Teste: Assinaturas de funções
         List<String> assinaturas = Arrays.asList(
             "void funcao1(int a, float b)",
             "String funcao2()",
             "int soma(int x, int y)",
             "1 soma int"
         );
-        ER.confereTrecho(ER.ASSINATURA_FUNCAO, assinaturas);
-        
-        // Vetor com parametros de funções
+        conferirER.confereTrecho(ER.ASSINATURA_FUNCAO, assinaturas);
+
+        // Teste: Parâmetros de funções
         List<String> parametros = Arrays.asList(
             "int a, float b",
             "float media, String nome",
             "double x, int y, char z",
             "float 1"
         );
-        ER.confereTrecho(ER.PARAMETROS_FUNCAO, parametros);
+        conferirER.confereTrecho(ER.PARAMETROS_FUNCAO, parametros);
 
-        // Vetor com Condicionais
+        // Teste: Condicionais
         List<String> condicionais = Arrays.asList(
             "if(ano < 1990)",
             "if(3*a != 4+t)",
             "if(a == b)",
             "(a : b)if"
         );
-        ER.confereTrecho(ER.CONDICIONAL,condicionais);
-        
-        // Vetor com possiveis expressões matemática
+        conferirER.confereTrecho(ER.CONDICIONAL, condicionais);
+
+        // Teste: Expressões matemáticas
         List<String> expressoesMatematicas = Arrays.asList(
             "3+media/3",
             "-4+beta*media[1].x",
             "soma(a, b)/4*vetor[5].idade",
-            "1/0" // Tratar erro /0
-            // Faz sentido do ponto de vista linguistico porem do ponto de vista matemático não faz.
+            "1/0" // Tratamento para erro de divisão por zero
         );
-        ER.confereTrecho(ER.EXPRESSAO_MATEMATICA, expressoesMatematicas);
+        conferirER.confereTrecho(ER.EXPRESSAO_MATEMATICA, expressoesMatematicas);
     }
-    
-
 }
 
 /*ExpressaoRegular ER = new ExpressaoRegular();

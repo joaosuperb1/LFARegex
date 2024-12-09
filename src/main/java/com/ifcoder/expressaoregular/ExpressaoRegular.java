@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ifcoder.expressaoregular;
 
 import java.util.List;
 
-/**
- *
- * @author jose
- */
 public class ExpressaoRegular {
 
-    //' ' (espaço), '\t' TAB, '\n' new line, '\r' volta o cursos para o inicio da linha, '\f' avanço de pagina, '\v' vertical TAB - (usado em configuraçoes de impressora)
+    /*' ' (espaço), '\t' TAB, '\n' new line, '\r' volta o cursos para o inicio da linha, 
+    '\f' avanço de pagina, '\v' vertical TAB - (usado em configuraçoes de impressora)*/
+    
     public String BRANCO, BRANCOS;
     public String DIGITO, DIGITOS;
     public String TIPO;
@@ -50,6 +44,7 @@ public class ExpressaoRegular {
      * OBS_2: A cada nova Expressao Regualar feita, teste-a.
      * ******************************************
      */
+    
     public ExpressaoRegular() {
         //' ' (espaço), '\t' TAB, '\n' new line, '\r' volta o cursos para o inicio da linha, '\f' avanço de pagina, '\v' vertical TAB - (usado em configuraçoes de impressora)
         BRANCO = "(\\s)"; // [ \t\n\r\f\v] onde
@@ -65,65 +60,30 @@ public class ExpressaoRegular {
         REAL = "(\\-?" + DIGITOS + "\\.?" + DIGITOS + EXPONENCIAL+")";
         INTEIRO = "("+DIGITOS + EXPONENCIAL + "?)";
         NUMEROS = "(" + INTEIRO + "|" + REAL + ")";
-
         ATRIBUICAO = IDENT + BRANCOS + "=" + BRANCOS + REAL;
         
         // Expressão Regular com os macros
         //"\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*)?\\s*\\)"
         //\\w+(uma palavra) \\s+(espaço em branco)\\w+(mais uma palavra)...
-        ASSINATURA_FUNCAO = "\\b" + TIPO + "\\b\\s+" + IDENT + "\\s*\\(" + "(\\s*" + TIPO + "\\s+" + IDENT + "(\\s*,\\s*" + TIPO + "\\s+" + IDENT + ")*)?\\s*\\)";
+        ASSINATURA_FUNCAO = "\\b" + TIPO + "\\b\\s+" + IDENT + "\\s*\\(" + 
+        "(\\s*" + TIPO + "\\s+" + IDENT + "(\\s*,\\s*" + TIPO + "\\s+" + IDENT + ")*)?\\s*\\)";
 
         
         // regex para Parametro "\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*"
-        PARAMETROS_FUNCAO = IDENT + BRANCOS + IDENT + "(" + BRANCOS + "," + BRANCOS + IDENT + BRANCOS + IDENT + ")*";
+        PARAMETROS_FUNCAO = IDENT + BRANCOS + IDENT + "(" + BRANCOS + "," + 
+        BRANCOS + IDENT + BRANCOS + IDENT + ")*";
         
         // regex para condicional "if\\s*\\(.*\\)"
-        CONDICIONAL = CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + EXPRESSAO_MATEMATICA + BRANCOS + "[<>=!]+" + BRANCOS + EXPRESSAO_MATEMATICA + BRANCOS + "\\)";
+        CONDICIONAL = CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + 
+        EXPRESSAO_MATEMATICA + BRANCOS + "[<>=!]+" + BRANCOS + 
+        EXPRESSAO_MATEMATICA + BRANCOS + "\\)";
 
         // regex para expressao matematica "[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?(\\s*[-+*/]\\s*[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?)*"
-        EXPRESSAO_MATEMATICA = "(" + IDENT + "|\\[" + NUMEROS + "\\]|" + NUMEROS + ")" + "(" + BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|\\[" + NUMEROS + "\\]|" + NUMEROS + ")" + ")*";
-
-        // ( variavel ou numero)+ espaco em branco Operador (variavel ou numero)+
+        EXPRESSAO_MATEMATICA = "(" + IDENT + "|\\[" + NUMEROS + "\\]|" + NUMEROS + ")" + "(" + 
+                BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|\\[" + NUMEROS + "\\]|" + 
+                NUMEROS + ")" + ")*";
+        // (variavel ou numero)+ espaco em branco Operador (variavel ou numero)+
         
     }
-
-        public void confere(String exp, String sentenca) {
-        if (exp == null || exp.isEmpty()) {
-            System.err.println("Expressao regular invalida ou vazia.");
-            return;
-        }
-        if ((sentenca == null) || sentenca.isEmpty()) {
-            System.err.println("Sentença vazia.");
-            return;
-        }
-        try {
-            // Detecta divisão por zero
-            if (sentenca.contains("/0")) {
-                throw new ArithmeticException("ERRO MATEMATICO: Divisão por zero detectada.");
-            }
-
-            if (sentenca.matches(exp)) {
-                System.out.println("W:'" + sentenca + "'........ ACEITA!");
-            } else {
-                System.err.println("W:'" + sentenca + "'........ rejeitada.");
-            }
-        } catch (ArithmeticException e) {
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Erro ao processar a expressao regular: " + e.getMessage());
-        }
-    }
-
-    public void confereTrecho(String exp, List<String> exemplos) {
-    if (exemplos == null || exemplos.isEmpty()) {
-        System.err.println("A lista de exemplos esta vazia ou e nula.");
-        return;
-    }
-    System.out.println("Testando expressoes regulares...");
-    for (String exemplo : exemplos) {
-        confere(exp, exemplo);
-    }
-    System.out.println();
-}
    
 }
