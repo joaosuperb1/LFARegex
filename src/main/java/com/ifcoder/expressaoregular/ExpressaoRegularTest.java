@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Classe criada para testar e tratar exceções utilizando a API JUnit. 
  * O JUnit realiza testes automatizados para verificar se o código funciona conforme esperado em vários cenários diferentes.
  */
+
 public class ExpressaoRegularTest {
 
     private final ExpressaoRegular er = new ExpressaoRegular(); // Para as expressões regulares
@@ -53,6 +54,6 @@ public class ExpressaoRegularTest {
             conferirER.confere(regex, sentenca); // Agora usamos a instância correta
         });
 
-        assertEquals("ERRO MATEMATICO: Divisao por zero detectada.", exception.getMessage());
+        assertEquals("ERRO MATEMATICO: Divisao por zero detectada. Linguisticamente ACEITO", exception.getMessage());
     }
 }

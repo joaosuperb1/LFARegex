@@ -19,6 +19,7 @@ public class TestesForaLoop {
 
     public void executarTestes() {
         System.out.println("Executando testes adicionais fora do loop...");
+        System.out.println();
 
         // Teste: Assinaturas de funções
         List<String> assinaturas = Arrays.asList(

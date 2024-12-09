@@ -1,8 +1,6 @@
 
 package com.ifcoder.expressaoregular;
 
-import java.util.List;
-
 public class ExpressaoRegular {
 
     /*' ' (espaço), '\t' TAB, '\n' new line, '\r' volta o cursos para o inicio da linha, 
@@ -74,9 +72,12 @@ public class ExpressaoRegular {
         BRANCOS + IDENT + BRANCOS + IDENT + ")*";
         
         // regex para condicional "if\\s*\\(.*\\)"
-        CONDICIONAL = CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + 
-        EXPRESSAO_MATEMATICA + BRANCOS + "[<>=!]+" + BRANCOS + 
-        EXPRESSAO_MATEMATICA + BRANCOS + "\\)";
+       CONDICIONAL = "if" + BRANCOS + "\\(" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + 
+       "(" + BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|" + NUMEROS + "))?" + 
+       BRANCOS + "[<>=!]+" + BRANCOS + "(" + IDENT + "|" + NUMEROS + ")" + 
+       "(" + BRANCOS + "[+\\-*/]" + BRANCOS + "(" + IDENT + "|" + NUMEROS + "))?" + 
+       BRANCOS + "\\)";
+
 
         // regex para expressao matematica "[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?(\\s*[-+*/]\\s*[-+]?\\w+(\\[\\d+\\](\\.\\w+)?|\\(.*?\\))?)*"
         EXPRESSAO_MATEMATICA = "(" + IDENT + "|\\[" + NUMEROS + "\\]|" + NUMEROS + ")" + "(" + 

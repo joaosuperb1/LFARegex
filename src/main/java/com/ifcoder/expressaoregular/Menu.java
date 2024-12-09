@@ -10,7 +10,7 @@ public class Menu {
         ExpressaoRegular ER = new ExpressaoRegular();
         ConferirER conferirER = new ConferirER();
         TestesForaLoop testes = new TestesForaLoop(conferirER); 
-        // Passa a instância de ConferirER para TestesForaLoop
+        // Passa a instancia de ConferirER para TestesForaLoop
         
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
@@ -39,6 +39,7 @@ public class Menu {
 
                 if (opcao == 0) {
                     continuar = false;
+                    System.out.println();
                     System.out.println("Saindo...");
                     testes.executarTestes();
                 } else {

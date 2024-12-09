@@ -43,7 +43,7 @@ public class ConferirER {
     for (String exemplo : exemplos) { /* itera por cada sentença */
         confere(exp, exemplo); /*testa cada sentença na expressão regular */
     }
-    System.out.println();
+   System.out.println();
 }
     
 }
