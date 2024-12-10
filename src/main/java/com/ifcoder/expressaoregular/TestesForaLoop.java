@@ -1,63 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.ifcoder.expressaoregular;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class TestesForaLoop {
-    private final ConferirER conferirER; //Acessar metodos confere
-    private final ExpressaoRegular ER; // Acessar os padrões
-    
-    /* Construtor instância de ConferirER */
+    private final ConferirER conferirER;
+
     public TestesForaLoop(ConferirER conferirER) {
         this.conferirER = conferirER;
-        this.ER = new ExpressaoRegular();
     }
 
     public void executarTestes() {
-        System.out.println("Executando testes adicionais fora do loop...");
-        System.out.println();
+        System.out.println("\nExecutando testes adicionais fora do loop...\n");
 
-        // Teste: Assinaturas de funções
+        // Testando Assinaturas de Funções
         List<String> assinaturas = Arrays.asList(
             "void funcao1(int a, float b)",
             "String funcao2()",
             "int soma(int x, int y)",
             "1 soma int"
         );
-        conferirER.confereTrecho(ER.ASSINATURA_FUNCAO, assinaturas);
+        conferirER.testarExpressoes("ASSINATURA_FUNCAO", assinaturas);
 
-        // Teste: Parâmetros de funções
+        // Testando Parâmetros de Função
         List<String> parametros = Arrays.asList(
             "int a, float b",
             "float media, String nome",
             "double x, int y, char z",
             "float 1"
         );
-        conferirER.confereTrecho(ER.PARAMETROS_FUNCAO, parametros);
+        conferirER.testarExpressoes("PARAMETROS_FUNCAO", parametros);
 
-        // Teste: Condicionais
+        // Testando Condicionais (if/else)
         List<String> condicionais = Arrays.asList(
             "if(ano < 1990)",
-            "if(3*a != 4+t)",
-            "if(a == b)",
+            "if(3*a != 4+t){}",
+            "if(a == b){}",
             "(a : b)if"
         );
-        conferirER.confereTrecho(ER.CONDICIONAL, condicionais);
+        conferirER.testarExpressoes("CONDICIONAL", condicionais);
 
-        // Teste: Expressões matemáticas
+        // Testando Expressões Matemáticas
         List<String> expressoesMatematicas = Arrays.asList(
             "3+media/3",
             "-4+beta*media[1].x",
             "soma(a, b)/4*vetor[5].idade",
-            "1/0" // Tratamento para erro de divisão por zero
+            "1/0"
         );
-        conferirER.confereTrecho(ER.EXPRESSAO_MATEMATICA, expressoesMatematicas);
+        conferirER.testarExpressoes("EXPRESSAO_MATEMATICA", expressoesMatematicas);
     }
 }
+
 
 /*ExpressaoRegular ER = new ExpressaoRegular();
 
@@ -98,7 +91,7 @@ public class TestesForaLoop {
         return "\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*)?\\s*\\)";
     }
 
-    //regex de parâmetros de funções
+    //regex de parametros de funções
     public String regexParametrosFuncao() {
         return "\\w+\\s+\\w+(\\s*,\\s*\\w+\\s+\\w+)*";
     }
